@@ -91,8 +91,7 @@
     },
     // 多点触摸
     gesture: function (handler) {
-      console.log(this)
-      this.gestureForIos = function() {
+      this.gesture4Ios = function() {
         this.elm.addEventListener('gesturestart', gestureFn)
         this.elm.addEventListener('gesturechange', gestureFn)
         this.elm.addEventListener('gestureend', gestureFn)
@@ -108,7 +107,7 @@
         }
       }
 
-      this.gestureForAdr = function() {
+      this.gesture4Adr = function() {
         let start = false
         this.elm.addEventListener('touchstart', (e) => {
           // 触摸点大于两个则认定为多点触摸
@@ -152,7 +151,7 @@
           return rotation * 180 / Math.PI
         }
       }
-      getDevice('ios') ? this.gestureForIos() : this.gestureForAdr()
+      getDevice('ios') ? this.gesture4Ios() : this.gesture4Adr()
     }
   }
   window.mEvent = mEvent
