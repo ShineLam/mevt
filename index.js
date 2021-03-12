@@ -28,7 +28,6 @@
           endTime = new Date().getTime()
           if (endTime - startTime < 300) {
             handler.call(this, e)
-            console.log('触发点击')
           }
         }
       }
@@ -44,7 +43,6 @@
         if (e.type === 'touchstart') {
           timer = setTimeout(() => {
             handler.call(this, e)
-            console.log('触发长按')
           }, 1000)
         } else if (e.type === 'touchmove') {
           clearTimeout(timer)
@@ -83,6 +81,9 @@
           }
         }
       }
+    },
+    gesture: function (handler) {
+      
     }
   }
   window.mEvent = mEvent
