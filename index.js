@@ -1,4 +1,9 @@
-(function name(window) {
+/**
+ * 
+ * @param {version} v1.0 
+ */
+
+(function (window) {
   function mEvent(selector) {
     return mEvent.prototype._init(selector)
   }
