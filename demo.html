@@ -7,7 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    body {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
     #demo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      width: 200px;
+      height: 200px;
       background: #ccc;
     }
   </style>
@@ -17,18 +28,29 @@
   <div id="demo">TRY ME, SOFT</div>
   <script src="./index.js"></script>
   <script>
-    mEvent('#demo').slide({
-      left: function () {
-        alert('左滑')
+    // mEvent('#demo').slide({
+    //   left: function () {
+    //     alert('左滑')
+    //   },
+    //   right: function () {
+    //     alert('右滑')
+    //   },
+    //   up: function () {
+    //     alert('上滑')
+    //   },
+    //   down: function () {
+    //     alert('下滑')
+    //   }
+    // })
+    mEvent('#demo').gesture({
+      start: function (e) {
+        alert('触摸了')
       },
-      right: function () {
-        alert('右滑')
+      move: function (e) {
+        alert('移动了')
       },
-      up: function () {
-        alert('上滑')
-      },
-      down: function () {
-        alert('下滑')
+      end: function (e) {
+        alert('离开了')
       }
     })
   </script>
