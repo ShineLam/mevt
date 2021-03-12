@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,13 +10,28 @@
     #demo {
       background: #ccc;
     }
-  </style> 
+  </style>
 </head>
+
 <body>
   <div id="demo">TRY ME, SOFT</div>
   <script src="./index.js"></script>
   <script>
-    mEvent('#demo').slide((e) => {})
+    mEvent('#demo').slide({
+      left: function () {
+        alert('左滑')
+      },
+      right: function () {
+        alert('右滑')
+      },
+      up: function () {
+        alert('上滑')
+      },
+      down: function () {
+        alert('下滑')
+      }
+    })
   </script>
 </body>
+
 </html>
