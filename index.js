@@ -64,18 +64,17 @@
         } else if (e.type === 'touchend') {
           endX = firstTouch.pageX
           endY = firstTouch.pageY
-          if (Math.abs(endX - startX) >= Math.abs(endY - startY) && (startX - endX > 0 && Math.abs(startX - endX) >= 30)) {
-            // 左滑
-            handler['left'].call(this, e)
-          } else if (Math.abs(endX - startX) >= Math.abs(endY - startY) && (startX - endX < 0 && Math.abs(startX - endX) >= 30)) {
-            // 右滑
-            handler['right'].call(this, e)
-          } else if (Math.abs(endX - startX) <= Math.abs(endY - startY) && (startY - endY > 0 && Math.abs(startY - endY) >= 30)) {
-            // 上滑
-            handler['up'].call(this, e)
-          } else if (Math.abs(endX - startX) <= Math.abs(endY - startY) && (startY - endY < 0 && Math.abs(startY - endY) >= 30)) {
-            // 下滑
-            handler['down'].call(this, e)
+          if (Math.abs(endX - startX) >= Math.abs(endY - startY)) {
+            // 左右滑动
+            // 滑动距离够再触发
+            if (Math.abs(startX - endX) >= 30) {
+              startX - endX > 0 ? handler['left'].call(this, e) : handler['right'].call(this, e)
+            }
+          } else {
+            // 上下滑动
+            if (Math.abs(startY - endY) >= 30) {
+              startY - endY > 0 ? handler['up'].call(this, e) : handler['down'].call(this, e)
+            }
           }
         }
       }
