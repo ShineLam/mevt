@@ -12,6 +12,7 @@
       width: 100vw;
       height: 100vh;
     }
+
     #demo {
       display: flex;
       align-items: center;
@@ -28,6 +29,7 @@
   <div id="demo">TRY ME, SOFT</div>
   <script src="./index.js"></script>
   <script>
+    // 滑动demo
     // mEvent('#demo').slide({
     //   left: function () {
     //     alert('左滑')
@@ -42,17 +44,22 @@
     //     alert('下滑')
     //   }
     // })
-    mEvent('#demo').gesture({
-      start: function (e) {
-        alert('触摸了')
-      },
-      move: function (e) {
-        alert('移动了')
-      },
-      end: function (e) {
-        alert('离开了')
-      }
+    // 滚动demo
+    mEvent('#demo').roll(e => {
+      console.log(this, e.distance)
     })
+    // 多指操作demo
+    // mEvent('#demo').gesture({
+    //   start: function (e) {
+    //     alert('触摸了')
+    //   },
+    //   move: function (e) {
+    //     alert('移动了')
+    //   },
+    //   end: function (e) {
+    //     alert('离开了')
+    //   }
+    // })
   </script>
 </body>
 

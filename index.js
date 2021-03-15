@@ -58,7 +58,7 @@
         }
       }
     },
-    // x方向移动距离大于y则 认定为滑动
+    // x方向移动距离大于y则 认定为左右滑动, 反之则为上下滑动
     slide: function (handler) {
       this.elm.addEventListener('touchstart', touchFn)
       this.elm.addEventListener('touchend', touchFn)
@@ -89,9 +89,35 @@
         }
       }
     },
+    // 自定义滚动区域 代替scroll
+    // 待优化项: 滚动速度 最大滑动值 = 列表高度 - 视口高度
+    roll: function (handler) {
+      this.elm.addEventListener('touchstart', touchFn)
+      this.elm.addEventListener('touchmove', touchFn)
+      
+      var startY = 0,
+        startEl = 0,
+        translateY = 0,
+        self = this
+      function touchFn(e) {
+        if (e.type === 'touchstart') {
+          startY = e.changedTouches[0].pageY
+          startEl = translateY
+        } else if (e.type === 'touchmove') {
+          var moveY = e.changedTouches[0].pageY
+          // 距离 = 结束点 - 起始点
+          var distance = moveY - startY
+          translateY = startEl + distance
+          e.distance = distance
+          e.translateY = translateY
+          self.elm.style.transform = 'translateY(' + translateY + 'px)'
+          handler.call(this, e)
+        }
+      }
+    },
     // 多点触摸
     gesture: function (handler) {
-      this.gesture4Ios = function() {
+      this.gesture4Ios = function () {
         this.elm.addEventListener('gesturestart', gestureFn)
         this.elm.addEventListener('gesturechange', gestureFn)
         this.elm.addEventListener('gestureend', gestureFn)
@@ -107,7 +133,7 @@
         }
       }
 
-      this.gesture4Adr = function() {
+      this.gesture4Adr = function () {
         let start = false
         this.elm.addEventListener('touchstart', (e) => {
           // 触摸点大于两个则认定为多点触摸
@@ -151,7 +177,8 @@
           return rotation * 180 / Math.PI
         }
       }
-      getDevice('ios') ? this.gesture4Ios() : this.gesture4Adr()
+      getDevice('ios') && this.gesture4Ios()
+      getDevice('adr') && this.gesture4Adr()
     }
   }
   window.mEvent = mEvent
